@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的第一个网站</title>
+
+  <!-- ===== 下面这一大块是样式。改颜色、改大小，都在这儿 ===== -->
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #0f172a;          /* ← 背景色，改这里 */
+      color: #e2e8f0;               /* ← 文字色，改这里 */
+      font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 8px;
+    }
+
+    .sub {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin: 0 0 24px;
+    }
+
+    .count {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #38bdf8;               /* ← 数字颜色 */
+      margin: 16px 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    button:hover  { opacity: 0.85; }
+    button:active { transform: scale(0.98); }
+
+    .primary {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .ghost {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+    }
+
+    input {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    input:focus { border-color: #38bdf8; }
+
+    .echo {
+      margin-top: 16px;
+      min-height: 24px;
+      font-size: 0.95rem;
+      color: #7dd3fc;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- ↓↓↓ 改你的名字，就改这一行 ↓↓↓ -->
+    <h1>你好，我是小白</h1>
+    <p class="sub">这是我的第一个网页，它已经在这台电脑上跑起来了</p>
+
+    <div class="count" id="count">0</div>
+
+    <button class="primary" onclick="add()">点我 +1</button>
+    <button class="ghost" onclick="reset()">清零</button>
+
+    <input id="nameInput" placeholder="在这里打字，下面会同步显示" />
+    <div class="echo" id="echo"></div>
+
+  </div>
+
+  <!-- ===== 下面是逻辑。按钮点了会发生什么，都在这儿 ===== -->
+  <script>
+    // 一个变量，记着当前数字
+    let n = 0;
+    const countEl = document.getElementById('count');
+
+    // 点 +1 按钮执行这个函数
+    function add() {
+      n = n + 1;
+      countEl.textContent = n;
+    }
+
+    // 点清零按钮执行这个函数
+    function reset() {
+      n = 0;
+      countEl.textContent = n;
+    }
+
+    // 输入框打字，下面实时同步
+    const inputEl = document.getElementById('nameInput');
+    const echoEl  = document.getElementById('echo');
+
+    inputEl.addEventListener('input', function () {
+      echoEl.textContent = inputEl.value ? '你打的是：' + inputEl.value : '';
+    });
+  </script>
+</body>
+</html>
