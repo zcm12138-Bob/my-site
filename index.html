@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -94,6 +94,23 @@
       color: #7dd3fc;
       word-break: break-all;
     }
+
+    /* 跳到个人主页的入口按钮 */
+    .link {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 10px 20px;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .link:hover {
+      border-color: #38bdf8;
+      background: #0f172a;
+    }
   </style>
 </head>
 
@@ -111,6 +128,8 @@
 
     <input id="nameInput" placeholder="在这里打字，下面会同步显示" />
     <div class="echo" id="echo"></div>
+
+    <a class="link" href="profile.html">看看我的个人主页 →</a>
 
   </div>
 
