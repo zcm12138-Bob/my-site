@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黄少的个人主页</title>
+
+  <style>
+    /* ========== 0. 全局重置 ========== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000f1e;
+      color: #38bdf8;
+      font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+    }
+
+    /* 通用容器：限制最大宽度 + 自动左右居中 */
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== 1. 导航栏 —— flex 的经典用法 ==========
+       一行里放两组东西，一组靠左，一组靠右 */
+    .nav {
+      display: flex;                    /* 开启 flex：子元素排成一行 */
+      justify-content: space-between;   /* 主轴两端对齐：左一个右一个 */
+      align-items: center;              /* 交叉轴居中：垂直方向对齐 */
+      padding: 18px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #38bdf8;
+    }
+
+    .nav-links {
+      display: flex;      /* 链接自己也是一组，排成一行 */
+      gap: 24px;          /* 子元素之间留 24px 空隙 —— 最省事的间距写法 */
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #38bdf8; }
+
+    /* ========== 2. 首屏 —— grid 居中 ========== */
+    .hero {
+      display: grid;
+      place-items: center;   /* 横向纵向同时居中，比 flex 少写两行 */
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b1120;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      max-width: 520px;
+    }
+
+    /* ========== 3. 卡片区 —— grid 自动换行 ==========
+       屏幕窄了自动从 3 列变 2 列变 1 列，不用写媒体查询 */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      padding: 40px 0;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);   /* 鼠标悬浮微微上浮 */
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #e2e8f0;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .card .tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      font-size: 0.75rem;
+      color: #7dd3fc;
+    }
+
+    /* ========== 4. 页脚 —— 又是 flex ========== */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;      /* 屏幕太窄时允许换行 */
+      gap: 12px;
+      padding: 24px 0;
+      border-top: 1px solid #1e293b;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    /* ========== 5. 手机适配 ========== */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .hero { padding: 48px 0 32px; }
+      .nav-links { gap: 14px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== 导航栏 ===== -->
+  <header class="wrap">
+    <nav class="nav">
+      <div class="logo">黄思远</div>
+      <ul class="nav-links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== 首屏 ===== -->
+  <section class="wrap">
+    <div class="hero" id="about">
+      <div class="avatar">黄思远</div>
+      <h1>阜阳师范大学优秀学生</h1>
+      <p>我在学前端部署。这个页面是我自己写的，也部署在我自己的网址上。</p>
+    </div>
+  </section>
+
+  <!-- ===== 卡片区 ===== -->
+  <section class="wrap" id="skills">
+    <div class="cards">
+
+      <div class="card">
+        <h3>我的大老婆武萍萍</h3>
+        <p>她是我的精神支柱，也是我最大的动力。</p>
+        <span class="tag">相爱中</span>
+      </div>
+
+      <div class="card">
+        <h3>我的二老婆孔维维</h3>
+        <p>她是我的贴心小棉袄，也是我最大的安慰。</p>
+        <span class="tag">相爱中</span>
+      </div>
+
+
+      <div class="card">
+        <h3>我的三老婆张文</h3>
+        <p>她是我的最严厉的老师</p>
+        <span class="tag">已拿下</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="wrap" id="contact">
+    <div class="footer">
+      <span>© 2026 黄少</span>
+      <span>用 HTML 手写，托管在 Vercel</span>
+    </div>
+  </footer>
+
+</body>
+</html>
