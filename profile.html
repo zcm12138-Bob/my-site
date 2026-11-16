@@ -6,148 +6,246 @@
   <title>黄少的个人主页</title>
 
   <style>
-    /* ========== 0. 全局重置 ========== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ============================================================
+       ★★★ 设计令牌（Design Tokens）★★★
+       全站的颜色、字号、间距都只在这里定义一次。
+       想换风格，只改这个块，下面几百行自动跟着变。
+       ============================================================ */
+    :root {
+      /* ── 品牌色：只用来点睛，不要拿它当正文颜色 ── */
+      --brand:        #38bdf8;
+      --brand-deep:   #0ea5e9;
+      --brand-soft:   #7dd3fc;
+      --brand-alt:    #6366f1;   /* 渐变第二个色 */
 
-    body {
-      background: #000f1e;
-      color: #38bdf8;
-      font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
-      line-height: 1.7;
+      /* ── 背景三层：越靠上的元素越亮，才有“浮起来”的感觉 ── */
+      --bg-base:      #0b1120;   /* 最底层：页面背景 */
+      --bg-card:      #151f33;   /* 中间层：卡片 */
+      --bg-sunken:    #070d18;   /* 下沉层：标签底、输入框 */
+
+      /* ── 文字四层：层次感的全部来源 ── */
+      --text-strong:  #f1f5f9;   /* 一级：大标题 */
+      --text-base:    #cbd5e1;   /* 二级：正文 */
+      --text-muted:   #7b8da4;   /* 三级：说明文字 */
+      --text-dim:     #55657a;   /* 四级：页脚、版权 */
+
+      /* ── 边框 ── */
+      --border:       #2a3b52;
+      --border-soft:  #1b2637;
+
+      /* ── 字号阶梯：只允许用这几个值，别再随手写 0.95rem ── */
+      --fs-xs:   0.75rem;    /* 12px  标签、页脚 */
+      --fs-sm:   0.875rem;   /* 14px  辅助文字、导航 */
+      --fs-base: 1rem;       /* 16px  正文 */
+      --fs-lg:   1.125rem;   /* 18px  卡片标题 */
+      --fs-xl:   1.5rem;     /* 24px  次标题 */
+      --fs-hero: 2.5rem;     /* 40px  首屏大字 */
+
+      /* ── 行高 ── */
+      --lh-tight: 1.2;       /* 标题：紧一点才有力 */
+      --lh-base:  1.75;      /* 正文：松一点才好读 */
+
+      /* ── 间距阶梯：全是 4 的倍数，全站只用这几个 ── */
+      --s-1:  4px;
+      --s-2:  8px;
+      --s-3:  12px;
+      --s-4:  16px;
+      --s-6:  24px;
+      --s-8:  32px;
+      --s-12: 48px;
+      --s-16: 64px;
+      --s-20: 80px;
+
+      /* ── 圆角 ── */
+      --r-sm:   8px;
+      --r-md:   14px;
+      --r-full: 999px;
+
+      /* ── 阴影与过渡 ── */
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --ease: 0.2s ease;
     }
 
-    /* 通用容器：限制最大宽度 + 自动左右居中 */
+    /* ============================================================
+       下面开始，所有值都从上面取。你不会再看到硬编码的颜色。
+       ============================================================ */
+
+    /* ── 0. 全局 ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }   /* 点导航跳转时平滑滚动 */
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-base);          /* ★ 正文用中间灰，不是品牌色 */
+      font-family: system-ui, -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+      line-height: var(--lh-base);
+      -webkit-font-smoothing: antialiased;  /* Mac 上字更细腻 */
+      font-feature-settings: "kern";        /* 字距微调 */
+    }
+
+    ::selection {
+      background: var(--brand);
+      color: var(--bg-base);            /* 选中文字时也是品牌色，但只是瞬间 */
+    }
+
+    a { color: inherit; }
+
+    /* 通用容器 */
     .wrap {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 var(--s-6);
     }
 
-    /* ========== 1. 导航栏 —— flex 的经典用法 ==========
-       一行里放两组东西，一组靠左，一组靠右 */
+    /* ── 1. 导航栏 ── */
     .nav {
-      display: flex;                    /* 开启 flex：子元素排成一行 */
-      justify-content: space-between;   /* 主轴两端对齐：左一个右一个 */
-      align-items: center;              /* 交叉轴居中：垂直方向对齐 */
-      padding: 18px 0;
-      border-bottom: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--s-6) 0;
+      border-bottom: 1px solid var(--border-soft);
     }
 
     .logo {
       font-weight: 700;
-      font-size: 1.1rem;
-      color: #38bdf8;
-      text-decoration: none;   /* 当链接用时不带下划线 */
+      font-size: var(--fs-lg);
+      color: var(--brand);              /* ★ 品牌色只出现在这种很小的地方 */
+      text-decoration: none;
+      letter-spacing: 0.02em;           /* 中文标题加一点字距，更透气 */
     }
 
     .nav-links {
-      display: flex;      /* 链接自己也是一组，排成一行 */
-      gap: 24px;          /* 子元素之间留 24px 空隙 —— 最省事的间距写法 */
+      display: flex;
+      gap: var(--s-6);
       list-style: none;
     }
 
     .nav-links a {
-      color: #94a3b8;
+      color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s;
+      font-size: var(--fs-sm);
+      transition: color var(--ease);
     }
-    .nav-links a:hover { color: #38bdf8; }
+    .nav-links a:hover { color: var(--text-strong); }
 
-    /* ========== 2. 首屏 —— grid 居中 ========== */
+    /* ── 2. 首屏 ── */
     .hero {
       display: grid;
-      place-items: center;   /* 横向纵向同时居中，比 flex 少写两行 */
+      place-items: center;
       text-align: center;
-      padding: 80px 0 60px;
+      padding: var(--s-20) 0 var(--s-16);
     }
 
     .avatar {
-      width: 96px;
-      height: 96px;
+      width: 104px;
+      height: 104px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      background: linear-gradient(135deg, var(--brand), var(--brand-alt));
       display: grid;
       place-items: center;
-      font-size: 2rem;
+      font-size: var(--fs-xl);
       font-weight: 700;
-      color: #0b1120;
-      margin-bottom: 24px;
+      color: var(--bg-base);
+      margin-bottom: var(--s-6);
+      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.08);  /* 光晕，很浅 */
     }
 
     .hero h1 {
-      font-size: 2rem;
-      margin-bottom: 12px;
+      /* clamp(最小值, 随屏幕缩放, 最大值) —— 不用媒体查询就自动适配手机 */
+      font-size: clamp(1.5rem, 5vw, var(--fs-hero));
+      line-height: var(--lh-tight);
+      color: var(--text-strong);        /* ★ 标题最亮 */
+      margin-bottom: var(--s-3);
+      letter-spacing: -0.01em;          /* 大标题收紧一点，更精致 */
     }
 
     .hero p {
-      color: #94a3b8;
+      color: var(--text-muted);         /* ★ 说明文字最暗 */
       max-width: 520px;
+      font-size: var(--fs-base);
     }
 
-    /* ========== 3. 卡片区 —— grid 自动换行 ==========
-       屏幕窄了自动从 3 列变 2 列变 1 列，不用写媒体查询 */
+    /* ── 3. 卡片区 ── */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      padding: 40px 0;
+      gap: var(--s-8);
+      padding: var(--s-12) 0;
     }
 
     .card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 24px;
-      transition: border-color 0.2s, transform 0.2s;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-md);
+      padding: var(--s-6);
+      transition: border-color var(--ease), transform var(--ease), box-shadow var(--ease);
     }
 
     .card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-2px);   /* 鼠标悬浮微微上浮 */
+      border-color: var(--border);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
     }
 
     .card h3 {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-      color: #e2e8f0;
+      font-size: var(--fs-lg);
+      line-height: var(--lh-tight);
+      color: var(--text-strong);        /* ★ 卡片标题最亮 */
+      margin-bottom: var(--s-2);
     }
 
     .card p {
-      font-size: 0.9rem;
-      color: #94a3b8;
+      font-size: var(--fs-sm);
+      color: var(--text-muted);         /* ★ 卡片说明中等偏暗 */
     }
 
-    .card .tag {
+    .tag {
       display: inline-block;
-      margin-top: 12px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: #0f172a;
-      border: 1px solid #334155;
-      font-size: 0.75rem;
-      color: #7dd3fc;
+      margin-top: var(--s-4);
+      padding: var(--s-1) var(--s-3);
+      border-radius: var(--r-full);
+      background: var(--bg-sunken);
+      border: 1px solid var(--border-soft);
+      font-size: var(--fs-xs);
+      color: var(--brand-soft);         /* ★ 标签才用到品牌色 */
     }
 
-    /* ========== 4. 页脚 —— 又是 flex ========== */
+    /* ── 4. 页脚 ── */
     .footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;      /* 屏幕太窄时允许换行 */
-      gap: 12px;
-      padding: 24px 0;
-      border-top: 1px solid #1e293b;
-      font-size: 0.85rem;
-      color: #64748b;
+      flex-wrap: wrap;
+      gap: var(--s-3);
+      padding: var(--s-6) 0;
+      border-top: 1px solid var(--border-soft);
+      font-size: var(--fs-xs);
+      color: var(--text-dim);           /* ★ 页脚最暗 */
     }
 
-    /* ========== 5. 手机适配 ========== */
+    /* ── 5. 手机适配 ── */
     @media (max-width: 640px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero { padding: 48px 0 32px; }
-      .nav-links { gap: 14px; font-size: 0.85rem; }
+      .hero      { padding: var(--s-12) 0 var(--s-8); }
+      .nav-links { gap: var(--s-3); }
+      .nav-links a { font-size: var(--fs-xs); }
     }
+
+    /* ============================================================
+       ★ 换主题速查：只改 :root 里这几个值，整站变样
+       
+       冰蓝（现在）：  --brand: #38bdf8   --brand-alt: #6366f1
+       薄荷绿：        --brand: #34d399   --brand-alt: #059669
+       暖橙：          --brand: #fb923c   --brand-alt: #f43f5e
+       莓紫：          --brand: #c084fc   --brand-alt: #818cf8
+       金黄：          --brand: #fbbf24   --brand-alt: #f97316
+
+       浅色主题（把背景翻过来）：
+         --bg-base: #f8fafc   --bg-card: #ffffff   --bg-sunken: #f1f5f9
+         --text-strong: #0f172a   --text-base: #334155
+         --text-muted: #64748b    --text-dim: #94a3b8
+         --border: #e2e8f0        --border-soft: #e8edf3
+       ============================================================ */
   </style>
 </head>
 
@@ -190,7 +288,6 @@
         <p>她是我的贴心小棉袄，也是我最大的安慰。</p>
         <span class="tag">相爱中</span>
       </div>
-
 
       <div class="card">
         <h3>我的三老婆张文</h3>
