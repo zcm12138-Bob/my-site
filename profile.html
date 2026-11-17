@@ -178,6 +178,22 @@
       max-width: 520px;
       font-size: var(--fs-base);
     }
+    .btn {
+      margin-top: var(--s-6);
+      padding: var(--s-3) var(--s-6);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      background: transparent;
+      color: var(--brand-soft);
+      font-size: var(--fs-sm);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .btn:hover {
+      border-color: var(--brand);
+      background: var(--bg-card);
+    }
 
     /* ── 3. 卡片区 ── */
     .cards {
@@ -284,32 +300,14 @@
       <div class="avatar">黄思远</div>
       <h1>阜阳师范大学优秀学生</h1>
       <p>我在学前端部署。这个页面是我自己写的，也部署在我自己的网址上。</p>
+        <button class="btn" id="changeBtn">换成一句话</button>
+     
     </div>
   </section>
 
   <!-- ===== 卡片区 ===== -->
   <section class="wrap" id="skills">
-    <div class="cards">
-
-      <div class="card">
-        <h3>我的大老婆武萍萍</h3>
-        <p>她是我的精神支柱，也是我最大的动力。</p>
-        <span class="tag">相爱中</span>
-      </div>
-
-      <div class="card">
-        <h3>我的二老婆孔维维</h3>
-        <p>她是我的贴心小棉袄，也是我最大的安慰。</p>
-        <span class="tag">相爱中</span>
-      </div>
-
-      <div class="card">
-        <h3>我的三老婆张文</h3>
-        <p>她是我的最严厉的老师</p>
-        <span class="tag">已拿下</span>
-      </div>
-
-    </div>
+    <div class="cards" id="girls"></div>
   </section>
 
   <!-- ===== 页脚 ===== -->
@@ -319,6 +317,42 @@
       <span>用 HTML 手写，托管在 Vercel</span>
     </div>
   </footer>
+<script>
+  //-1.数据：以后要加人，只改这里-
+  const girls=[{name:'我的大老婆武萍萍', desc:"她是我的精神支柱",tag:"相爱中"},
+  {name:'我的二老婆孔维维', desc:"她是我的贴心小棉袄",tag:"相爱中"},
+  {name:'我的三老婆张文', desc:"她是我的最严厉的老师",tag:"已拿下"},
+{name:'我的四老婆马卓林',desc:'她是zcm的最爱的女人',tag:'被zcm抢走了'}]
+  const box = document.getElementById('girls')
+  box.innerHTML = girls.map(function(g){return`
+    <div class="card">
+      <h3>${g.name}</h3>
+      <p>${g.desc}</p>
+      <span class="tag">${g.tag}</span>
+    </div>
+        `
+      }).join('')
+       // ── 换一句话 ──
+  const lines = [
+    '我在学前端部署。这个页面是我自己写的。',
+    '今天学会了函数，点一下就能看出区别。',
+    '数据驱动：加一行数据，就多一张卡片。',
+    '这是我亲手部署到公网上的网站。'
+  ]
 
+  let idx = 0
+
+  const btn = document.getElementById('changeBtn')
+  const heroP = document.querySelector('.hero p')
+
+  // 点击时执行这个函数
+  btn.addEventListener('click', function () {
+    idx = idx + 1
+    if (idx >= lines.length) {
+      idx = 0          // 到头了就回到第一个
+    }
+    heroP.textContent = lines[idx]
+  })
+</script>
 </body>
 </html>
