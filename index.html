@@ -111,6 +111,13 @@
       border-color: #38bdf8;
       background: #0f172a;
     }
+        .links {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .links .link { margin-top: 0; }
   </style>
 </head>
 
@@ -129,8 +136,10 @@
     <input id="nameInput" placeholder="在这里打字，下面会同步显示" />
     <div class="echo" id="echo"></div>
 
-    <a class="link" href="profile.html">看看我的个人主页 →</a>
-
+        <div class="links">
+      <a class="link" href="profile.html">个人主页 →</a>
+      <a class="link" href="todo.html">待办清单 →</a>
+    </div>
   </div>
 
   <!-- ===== 下面是逻辑。按钮点了会发生什么，都在这儿 ===== -->
