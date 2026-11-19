@@ -136,6 +136,22 @@
       transition: color 0.2s ease;
     }
     .nav a:hover { color: var(--text-strong); }
+        #clearBtn {
+      width: 72px;
+      padding: 12px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    #clearBtn:hover {
+      border-color: #f43f5e;
+      color: #fb7185;
+    }
     .nav a.on { color: var(--brand); }
     </style>
 
@@ -149,18 +165,27 @@
   <div class="row">
     <input id="input" type="text" placeholder="写一件要做的事">
     <button id="addBtn">添加</button>
+    <button id="clearBtn">清空</button>
   </div>
   <p id="meta">共 0 条</p>
   <ul id="list"></ul>
   
 
-      <script>
-    var todos = ['背 20 个单词', '看 MDN 的数组章节']
+       <script>
+       var saved = localStorage.getItem('todos')
+
+    var todos = saved ? JSON.parse(saved) : ['背 20 个单词', '看 MDN 的数组章节']
 
     var input  = document.getElementById('input')
     var addBtn = document.getElementById('addBtn')
+    var clearBtn = document.getElementById('clearBtn')
     var list   = document.getElementById('list')
     var meta   = document.getElementById('meta')
+
+    // ── 存：把 todos 塞进浏览器的柜子 ──
+    function save() {
+      localStorage.setItem('todos', JSON.stringify(todos))
+    }
 
     function render() {
       if (todos.length === 0) {
@@ -184,15 +209,24 @@
 
       todos.push(text)
       input.value = ''
+      save()      // ← 新加的，存完再画
+      render()
+    }
+        function clearAll() {
+      if (todos.length === 0) { return }
+      todos = []
+      save()
       render()
     }
 
     function delTodo(i) {
       todos.splice(i, 1)
+      save()      // ← 新加的
       render()
     }
 
     addBtn.addEventListener('click', addTodo)
+    clearBtn.addEventListener('click', clearAll)
 
     render()
   </script>
