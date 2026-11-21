@@ -1,0 +1,150 @@
+a6ed66d8f9eb55394d77644a10a0bec2ace1d8977072ed86b848b4446b3c6e3b
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script data-hf-gsap-fallback>
+(function(){
+  var cdnBase="/api/vendor/npm/gsap@3.15.0/dist/";
+  var loaded={};
+  function loadFallback(file){
+    if(loaded[file])return loaded[file];
+    return loaded[file]=new Promise(function(ok,fail){
+      var s=document.createElement("script");
+      s.src=cdnBase+file;s.hfGsapFallback=true;s.onload=ok;s.onerror=fail;
+      document.head.appendChild(s);
+    });
+  }
+  document.addEventListener("error",function(e){
+    var t=e.target;
+    if(!t||t.tagName!=="SCRIPT"||!t.src||t.hfGsapFallback)return;
+    var m=t.src.match(/gsap[^/]*\/dist\/(.+\.js)/);
+    if(m)loadFallback(m[1]).catch(function(){
+      reportError(new Error("GSAP could not load from "+t.src+" or "+cdnBase+m[1]+", so this preview's animations will not play."));
+    });
+  },true);
+})();
+</script>
+<meta name="hyperframes-gsap-base-url" content="/api/vendor/npm">
+<meta name="hyperframes-studio-preview"><script>(function(){var seen=window.__hfPreviewErrors=[],kinds=window.__hfPreviewErrorKinds=[],known={SyntaxError:1,TypeError:1,ReferenceError:1,RangeError:1},runtime="/api/runtime.js";
+addEventListener("error",function(e){seen.push(e.message||String(e));
+var name=e.error&&e.error.constructor&&e.error.constructor.name,path="";
+try{var url=e.filename&&new URL(e.filename,window.location.href);if(url&&url.origin===window.location.origin)path=url.pathname}catch(_){}
+kinds.push({name:known[name]===1?name:"other",origin:!path?"unknown":path===runtime?"runtime":path.indexOf("/api/projects/")===0?"project":"studio"})});})();</script>
+<script data-hyperframes-preview-runtime="1" src="/api/runtime.js"></script>
+<base href="/api/projects/vibe-demo/preview/">
+<script type="importmap">{"imports":{"/":"/api/projects/vibe-demo/preview/","/api/projects/vibe-demo/preview/":"/api/projects/vibe-demo/preview/"}}</script><style data-hyperframes-text-rendering="true">html,body,*{text-rendering:geometricPrecision}</style><script data-hf-after-fonts-fallback="">document.addEventListener("DOMContentLoaded", function () {
+  if (window.__hfAfterFontsClaimed) return;
+  var T = "text/hf-after-fonts";
+  var all = [].slice.call(document.querySelectorAll('script[type="text/hf-after-fonts"], script[type="text/hf-after-fonts+module"]'));
+  if (!all.length) return;
+  console.warn("[hyperframes] the runtime has no web-font gate; composition scripts run without waiting for fonts");
+  var late = function (el) { return el.type !== T || el.matches('[defer][src], [defer][data-hf-inlined-src]'); };
+  var queue = all.filter(function (el) { return !late(el); }).concat(all.filter(late));
+  (function next() {
+    var el = queue.shift();
+    if (!el) return;
+    var s = document.createElement("script");
+    for (var i = 0; i < el.attributes.length; i++) s.setAttribute(el.attributes[i].name, el.attributes[i].value);
+    if (el.type === T) s.removeAttribute("type"); else s.type = "module";
+    s.async = el.hasAttribute("async");
+    s.text = el.text;
+    var waits = s.type !== "module" && s.hasAttribute("src") && !s.async && !s.noModule;
+    if (waits) { s.addEventListener("load", next); s.addEventListener("error", next); }
+    el.replaceWith(s);
+    if (!waits) next();
+  })();
+});
+//# sourceURL=hyperframes://after-fonts-fallback</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+:root{--bg:#0e1116;--ink:#e6edf3;--dim:#8b98a8;--acc:#63a4ff}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg)}
+#root{position:relative;width:100%;height:100%;font-family:system-ui,sans-serif;color:var(--ink)}
+.scene{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.kicker{position:absolute;left:80px;top:64px;font-size:28px;color:var(--acc);letter-spacing:4px}
+.txt{position:absolute;left:80px;top:0;width:900px;height:1080px;display:flex;flex-direction:column;justify-content:center;gap:28px}
+h1{font-size:96px;font-weight:700;line-height:1.1}
+.sub{font-size:34px;color:var(--dim);line-height:1.5}
+.fig{position:absolute;left:1040px;top:240px;width:800px;height:600px}
+.cell{position:absolute;width:160px;height:160px;border-radius:20px;background:var(--acc)}
+.bar{position:absolute;bottom:0;width:120px;border-radius:12px 12px 0 0;background:var(--acc)}
+.node{position:absolute;top:240px;width:120px;height:120px;border-radius:60px;border:4px solid var(--acc)}
+.link{position:absolute;top:298px;height:4px;background:var(--acc)}
+</style>
+
+<meta name="hyperframes-project-signature" content="7375e50f0bfbbcf795c7838a">
+</head>
+<body>
+<div data-hf-id="hf-199x" id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+  <section data-hf-id="hf-tk7n" id="s1" class="scene clip" data-start="0" data-duration="3" data-track-index="0">
+    <div data-hf-id="hf-ghtr" class="kicker">VIBE CODING</div>
+    <div data-hf-id="hf-kvio" class="txt"><h1 data-hf-id="hf-r8d4">Vibe Coding</h1><div data-hf-id="hf-2oyg" class="sub">知识大赏 · 10 秒入门</div></div>
+    <div data-hf-id="hf-uzqn" class="fig" id="f1"></div>
+  </section>
+  <section data-hf-id="hf-ny72" id="s2" class="scene clip" data-start="3" data-duration="4" data-track-index="0">
+    <div data-hf-id="hf-pp68" class="kicker">01 · 是什么</div>
+    <div data-hf-id="hf-gju0" class="txt"><h1 data-hf-id="hf-btax">用说的写代码</h1><div data-hf-id="hf-uxii" class="sub">用自然语言描述想法，让 AI 生成并不断迭代代码</div></div>
+    <div data-hf-id="hf-mbus" class="fig" id="f2"></div>
+  </section>
+  <section data-hf-id="hf-ubys" id="s3" class="scene clip" data-start="7" data-duration="3" data-track-index="0">
+    <div data-hf-id="hf-sp9q" class="kicker">02 · 怎么用</div>
+    <div data-hf-id="hf-fcwx" class="txt"><h1 data-hf-id="hf-8mk1">你定方向，AI 动手</h1><div data-hf-id="hf-xncy" class="sub">描述 → 运行 → 反馈 → 再描述</div></div>
+    <div data-hf-id="hf-n3il" class="fig" id="f3"></div>
+  </section>
+</div>
+
+<script type="text/hf-after-fonts">window.__timelines = window.__timelines || {};
+var f1 = document.getElementById("f1"), f2 = document.getElementById("f2"), f3 = document.getElementById("f3");
+for (var i = 0; i < 9; i++) {
+  var c = document.createElement("div");
+  c.className = "cell";
+  c.style.left = i % 3 * 240 + "px";
+  c.style.top = Math.floor(i / 3) * 200 + "px";
+  c.style.opacity = i % 2 ? 0.55 : 1;
+  f1.appendChild(c);
+}
+var hs = [140, 230, 320, 420, 540];
+for (var j = 0; j < 5; j++) {
+  var b = document.createElement("div");
+  b.className = "bar";
+  b.style.left = j * 170 + "px";
+  b.style.height = hs[j] + "px";
+  f2.appendChild(b);
+}
+for (var k = 0; k < 4; k++) {
+  var n = document.createElement("div");
+  n.className = "node";
+  n.style.left = k * 226 + "px";
+  f3.appendChild(n);
+  if (k < 3) {
+    var l = document.createElement("div");
+    l.className = "link";
+    l.style.left = k * 226 + 120 + "px";
+    l.style.width = "106px";
+    f3.appendChild(l);
+  }
+}
+var tl = gsap.timeline({ paused: true });
+function enter(id, t) {
+  tl.fromTo(id + " .kicker", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, t + 0.1);
+  tl.fromTo(id + " h1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, t + 0.2);
+  tl.fromTo(id + " .sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, t + 0.5);
+}
+function leave(id, t) {
+  tl.to(id + " .kicker, " + id + " .txt, " + id + " .fig", { opacity: 0, duration: 0.4, ease: "power1.in" }, t);
+}
+tl.fromTo("#s1 .kicker", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
+tl.fromTo("#s1 h1", { opacity: 0.2, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0);
+tl.fromTo("#s1 .sub", { opacity: 0.2, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+tl.fromTo("#f1 .cell", { scale: 0.3 }, { scale: 1, duration: 0.5, stagger: 0.08, ease: "back.out(1.6)" }, 0);
+leave("#s1", 2.55);
+enter("#s2", 3);
+tl.fromTo("#f2 .bar", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.8, stagger: 0.2, ease: "power3.out" }, 3.4);
+leave("#s2", 6.55);
+enter("#s3", 7);
+tl.fromTo("#f3 .node", { scale: 0 }, { scale: 1, duration: 0.5, stagger: 0.4, ease: "back.out(1.6)" }, 7.4);
+tl.fromTo("#f3 .link", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.4, stagger: 0.4, ease: "power2.out" }, 7.7);
+window.__timelines["main"] = tl;</script></body>
+</html>

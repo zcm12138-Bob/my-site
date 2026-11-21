@@ -153,6 +153,30 @@
       color: #fb7185;
     }
     .nav a.on { color: var(--brand); }
+        .api {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .api button {
+      padding: 10px 20px;
+      border: 1px solid var(--brand);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--brand);
+      font-size: 0.875rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .api button:hover {
+      background: var(--bg-card);
+    }
+    #apiOut {
+      margin-top: 12px;
+      min-height: 26px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
     </style>
 
 <body>
@@ -161,7 +185,7 @@
     <a href="profile.html">个人主页</a>
     <a href="todo.html" class="on">待办清单</a>
   </nav>
-  <h1>我的待办</h1>
+  <h1>我的待办</h1>function loadUser()
   <div class="row">
     <input id="input" type="text" placeholder="写一件要做的事">
     <button id="addBtn">添加</button>
@@ -169,6 +193,10 @@
   </div>
   <p id="meta">共 0 条</p>
   <ul id="list"></ul>
+    <div class="api">
+    <button id="fetchBtn">从 GitHub 抓我的数据</button>
+    <p id="apiOut">还没抓</p>
+  </div>
   
 
        <script>
@@ -227,6 +255,29 @@
 
     addBtn.addEventListener('click', addTodo)
     clearBtn.addEventListener('click', clearAll)
+        var fetchBtn = document.getElementById('fetchBtn')
+    var apiOut   = document.getElementById('apiOut')
+
+        function loadUser() {
+      apiOut.textContent = '正在抓……'
+
+      fetch('https://api.github.com/users/zcm12138-Bob')
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error('对方说：' + res.status)
+          }
+          return res.json()
+        })
+        .then(function (data) {
+          apiOut.textContent =
+            data.login + '：' + data.public_repos + ' 个仓库，' +
+            data.followers + ' 个粉丝'
+        })
+        .catch(function (err) {
+          apiOut.textContent = '出错了：' + err.message
+        })
+    }
+    fetchBtn.addEventListener('click', loadUser)
 
     render()
   </script>
